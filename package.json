@@ -1,9 +1,10 @@
 {
   "name": "vcount",
   "description": "vue-count",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "author": "reckful <reckfulirl@gmail.com>",
   "private": false,
+  "main": "./src/vcount.vue",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
