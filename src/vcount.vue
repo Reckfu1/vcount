@@ -3,7 +3,8 @@
     <span>
         {{displayNumber}}
     </span>
-    <div @click="play">play</div>
+    <div @click="play(test)">play</div>
+    <div @click="pauseResume">pause/resume</div>
     </div>
 </template>
 
@@ -41,22 +42,48 @@ export default {
             startTime: null,
             timestamp: null,
             remaining: null,
-            rAF: null
+            rAF: null,
+            callback:null,
+            test(){
+                console.log('ok')
+            }
         }
     },
     methods: {
-        easeOutExpo(t,b,c,d){
-            return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b
-        },
-        play() {
+        play(callback) {
             this.startVal = this.start
             this.startTime = null
             this.localDuration = this.duration
             this.paused = false
+            this.callback=callback
             this.rAF = requestAnimationFrame(this.count);
         },
+        pauseResume(){
+            if(this.paused){
+                this.resume()
+            }
+            else{
+                this.pause()
+            }
+        },
+        reset(){
+            this.startTime = null
+            this.destroyed()
+            this.displayNumber = this.formatNumber(this.startVal)
+        },
+        pause(){
+            this.destroyed()
+            this.paused=true
+        },
+        resume(){
+            this.startTime = null
+            this.localDuration = +this.remaining
+            this.startVal = +this.frameVal
+            requestAnimationFrame(this.count)
+            this.paused=false
+        },
         count(timestamp) {
-            if (!this.startTime) { this.startTime = timestamp; }
+            if (!this.startTime) { this.startTime = timestamp }
 
             this.timestamp=timestamp
             let progress=timestamp-this.startTime
@@ -87,10 +114,12 @@ export default {
             }
             this.displayNumber = this.formatNumber(this.frameVal)
             if (progress < this.localDuration) {
-                this.rAF = requestAnimationFrame(this.count);
+                this.rAF = requestAnimationFrame(this.count)
             } 
             else {
-                this.$emit('callback');
+                if(this.callback){
+                    this.callback()
+                }
             }
 
         },
@@ -124,6 +153,9 @@ export default {
         },
         destroyed() {
             cancelAnimationFrame(this.rAF)
+        },
+        easeOutExpo(t,b,c,d){
+            return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b
         }
     },
     computed: {
