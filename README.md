@@ -28,28 +28,28 @@ export default {
 ## Usage
 Props:
 - `start`: Number
-#####the value you want to begin at
+##### the value you want to begin at
 - `end`: Number
-#####the value you want to arrive at
+##### the value you want to arrive at
 - `duration`: Number
-#####duration in milliseconds
+##### duration in milliseconds
 - `decimal`: String
-#####split decimal
+##### split decimal
 - `decimals`: Number
-#####number of decimal places in number
+##### number of decimal places in number
 - `separator`: String
-#####character to use as a separator
+##### character to use as a separator
 - `prefix`: String
-#####optional text before the result
+##### optional text before the result
 - `suffix`: String
-#####optional text after the result
+##### optional text after the result
 - `useEasing`: Boolean
 #####easing function
 - `watchValue`: Boolean
-#####watch startValue and endValue
+##### watch startValue and endValue
 
 Default Options:
 
 ```vue
-<vcount :start='0' :end='1000' :duration='4000' :decimal='.' :decimals='0' :separator=',' :prefix='' :suffix='' :useEasing=true :watchValue=true></vcount>
+<vcount :start='0' :end='1000' :duration='4000' :decimal='.' :decimals='0' :separator=',' :watchValue=true :prefix='' :suffix='' :useEasing=true></vcount>
 ```
