@@ -8,7 +8,7 @@ npm install vcount
 ## Example
 ``` vue
 <template>
-  <vcount :start='startValue' :end='endValue' :duration='4000'></vcount>
+  <vcount :start='startValue' :end='endValue' :duration='duration'></vcount>
 </template>
 
 <script>
@@ -18,7 +18,8 @@ export default {
     data () {
         return {
             startValue: 0,
-            endValue: 2000
+            endValue: 2000,
+            duration:4000
         }
     }
 }
@@ -51,5 +52,25 @@ watch startValue and endValue
 Default Options:
 
 ```vue
-<vcount :start='0' :end='1000' :duration='4000' :decimal='.' :decimals='0' :separator=',' :prefix='' :suffix='' :useEasing=true :watchValue=true></vcount>
+<template>
+    <vcount :start='start' :end='end' :duration='duration' :decimal='decimal' :decimals='decimals' :separator='separator' :prefix='prefix' :suffix='suffix' :useEasing='useEasing' :watchValue='watchValue'></vcount>
+</template>
+<script>
+export default {
+  data(){
+    return {
+      start:0,
+      end:2000,
+      duration:4000,
+      decimal:'.',
+      decimals:'0',
+      separator:',',
+      prefix:'',
+      suffix:'',
+      useEasing:true,
+      watchValue:true
+    }
+  }
+}
+</script>
 ```
