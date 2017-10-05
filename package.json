@@ -1,7 +1,7 @@
 {
   "name": "vcount",
   "description": "vue-count",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "author": "reckful <reckfulirl@gmail.com>",
   "private": false,
   "main": "./src/vcount.vue",
