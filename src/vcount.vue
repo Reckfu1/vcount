@@ -157,12 +157,22 @@ export default {
     watch: {
         start() {
             if (this.watchValue) {
-                this.play()
+                if(this.callback){
+                    this.play(this.callback)
+                }
+                else{
+                    this.play()
+                }
             }
         },
         end() {
             if (this.watchValue) {
-                this.play()
+                if(this.callback){
+                    this.play(this.callback)
+                }
+                else{
+                    this.play()
+                }
             }
         }
     },
@@ -225,7 +235,14 @@ export default {
         }
     },
     mounted() {
-        if (this.watchValue) this.play()
+        if (this.watchValue){
+            if(this.callback){
+                this.play(this.callback)
+            }
+            else{
+                this.play()
+            }
+        }
     }
 }
 </script>

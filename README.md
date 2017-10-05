@@ -27,7 +27,7 @@ export default {
 ```
 
 ## Usage
-Props:
+#### Props:
 - `start`: Number</br>
 the value you want to begin at
 - `end`: Number</br>
@@ -49,7 +49,7 @@ easing function
 - `watchValue`: Boolean</br>
 watch startValue and endValue
 
-Default Options:
+#### Default Options:
 
 ```vue
 <template>
@@ -62,13 +62,38 @@ export default {
       start:0,
       end:2000,
       duration:4000,
-      decimal:'.',
+      decimal:'.',  
       decimals:'0',
       separator:',',
       prefix:'',
       suffix:'',
       useEasing:true,
       watchValue:true
+    }
+  }
+}
+</script>
+```
+
+#### Methods:
+
+```vue
+<template>
+    <vcount ref='child'></vcount>
+    <span @click='toCallOnComplete'></span>
+</template>
+<script>
+export default {
+  methods:{
+    toCallOnComplete(){
+        this.$refs.child.play(function(){
+            alert('completed')
+        })
+        // or
+        // this.$refs.child.play(this.completed)
+    },
+    completed(){
+        alert('completed')
     }
   }
 }
