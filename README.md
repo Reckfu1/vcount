@@ -99,3 +99,16 @@ export default {
 }
 </script>
 ```
+
+Other Methods:
+
+```js
+// Toggle pause/resume
+this.$refs.child.pauseResume()
+
+// Reset
+this.$refs.child.reset()
+```
+
+## License
+[MIT]
