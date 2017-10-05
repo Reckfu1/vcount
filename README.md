@@ -27,29 +27,29 @@ export default {
 
 ## Usage
 Props:
-- `start`: Number
-##### the value you want to begin at
-- `end`: Number
-##### the value you want to arrive at
-- `duration`: Number
-##### duration in milliseconds
-- `decimal`: String
-##### split decimal
-- `decimals`: Number
-##### number of decimal places in number
-- `separator`: String
-##### character to use as a separator
-- `prefix`: String
-##### optional text before the result
-- `suffix`: String
-##### optional text after the result
-- `useEasing`: Boolean
-#####easing function
-- `watchValue`: Boolean
-##### watch startValue and endValue
+- `start`: Number</br>
+the value you want to begin at
+- `end`: Number</br>
+the value you want to arrive at
+- `duration`: Number</br>
+duration in milliseconds
+- `decimal`: String</br>
+split decimal
+- `decimals`: Number</br>
+number of decimal places in number
+- `separator`: String</br>
+character to use as a separator
+- `prefix`: String</br>
+optional text before the result
+- `suffix`: String</br>
+optional text after the result
+- `useEasing`: Boolean</br>
+easing function
+- `watchValue`: Boolean</br>
+watch startValue and endValue
 
 Default Options:
 
 ```vue
-<vcount :start='0' :end='1000' :duration='4000' :decimal='.' :decimals='0' :separator=',' :watchValue=true :prefix='' :suffix='' :useEasing=true></vcount>
+<vcount :start='0' :end='1000' :duration='4000' :decimal='.' :decimals='0' :separator=',' :prefix='' :suffix='' :useEasing=true :watchValue=true></vcount>
 ```
