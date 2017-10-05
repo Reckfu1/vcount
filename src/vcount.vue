@@ -1,13 +1,10 @@
 <template>
-    <div>
     <span>
         {{displayNumber}}
     </span>
-    <div @click="play(test)">play</div>
-    <div @click="pauseResume">pause/resume</div>
-    </div>
+    <!--     <div @click="play(test)">play</div>
+    <div @click="pauseResume">pause/resume</div> -->
 </template>
-
 <script>
 let lastTIme = 0
 let vendors = ['webkit', 'moz', 'ms', 'o']
@@ -43,10 +40,10 @@ export default {
             timestamp: null,
             remaining: null,
             rAF: null,
-            callback:null,
-            test(){
-                console.log('ok')
-            }
+            callback: null
+            // test(){
+            //     console.log('completed!')
+            // }
         }
     },
     methods: {
@@ -55,69 +52,63 @@ export default {
             this.startTime = null
             this.localDuration = this.duration
             this.paused = false
-            this.callback=callback
+            this.callback = callback
             this.rAF = requestAnimationFrame(this.count);
         },
-        pauseResume(){
-            if(this.paused){
+        pauseResume() {
+            if (this.paused) {
                 this.resume()
-            }
-            else{
+            } else {
                 this.pause()
             }
         },
-        reset(){
+        reset() {
             this.startTime = null
             this.destroyed()
             this.displayNumber = this.formatNumber(this.startVal)
         },
-        pause(){
+        pause() {
             this.destroyed()
-            this.paused=true
+            this.paused = true
         },
-        resume(){
+        resume() {
             this.startTime = null
             this.localDuration = +this.remaining
             this.startVal = +this.frameVal
             requestAnimationFrame(this.count)
-            this.paused=false
+            this.paused = false
         },
         count(timestamp) {
             if (!this.startTime) { this.startTime = timestamp }
 
-            this.timestamp=timestamp
-            let progress=timestamp-this.startTime
-            this.remaining=this.localDuration-progress
+            this.timestamp = timestamp
+            let progress = timestamp - this.startTime
+            this.remaining = this.localDuration - progress
 
-            if(this.useEasing){
-                if(this.countDown){
+            if (this.useEasing) {
+                if (this.countDown) {
                     this.frameVal = this.startVal - this.easeOutExpo(progress, 0, this.startVal - this.end, this.localDuration)
+                } else {
+                    this.frameVal = this.easeOutExpo(progress, this.startVal, this.end - this.startVal, this.localDuration)
                 }
-                else{
-                    this.frameVal=this.easeOutExpo(progress,this.startVal,this.end-this.startVal,this.localDuration)
-                }
-            }
-            else{
-                if(this.countDown){
+            } else {
+                if (this.countDown) {
                     this.frameVal = this.startVal - ((this.startVal - this.end) * (progress / this.localDuration))
-                }
-                else{
+                } else {
                     this.frameVal = this.startVal + (this.end - this.startVal) * (progress / this.localDuration)
                 }
             }
 
-            if(this.countDown){
-                this.frameVal=(this.frameVal < this.end) ? this.end : this.frameVal
-            }
-            else{
+            if (this.countDown) {
+                this.frameVal = (this.frameVal < this.end) ? this.end : this.frameVal
+            } else {
                 this.frameVal = (this.frameVal > this.end) ? this.end : this.frameVal
             }
             this.displayNumber = this.formatNumber(this.frameVal)
             if (progress < this.localDuration) {
                 this.rAF = requestAnimationFrame(this.count)
-            } 
-            else {
-                if(this.callback){
+            } else {
+                if (this.callback) {
                     this.callback()
                 }
             }
@@ -154,7 +145,7 @@ export default {
         destroyed() {
             cancelAnimationFrame(this.rAF)
         },
-        easeOutExpo(t,b,c,d){
+        easeOutExpo(t, b, c, d) {
             return c * (-Math.pow(2, -10 * t / d) + 1) * 1024 / 1023 + b
         }
     },
@@ -163,34 +154,46 @@ export default {
             return this.start > this.end
         }
     },
+    watch: {
+        start() {
+            if (this.watchValue) {
+                this.play()
+            }
+        },
+        end() {
+            if (this.watchValue) {
+                this.play()
+            }
+        }
+    },
     props: {
         start: {
             type: Number,
             default: 0,
-            required:false
+            required: false
         },
         end: {
             type: Number,
             default: 1000,
-            required:false
+            required: false
         },
         // 十进制分隔符
         decimal: {
             type: String,
-            required:false,
+            required: false,
             default: '.'
         },
         // 显示的小数位数
         decimals: {
             type: Number,
-            required:false,
+            required: false,
             default: 0
         },
         // 过渡时间
         duration: {
             type: Number,
-            required:false,
-            default: 3000
+            required: false,
+            default: 4000
         },
         // 分隔符 如：1,000
         separator: {
@@ -214,7 +217,15 @@ export default {
             type: Boolean,
             required: false,
             default: true
+        },
+        watchValue: {
+            type: Boolean,
+            required: false,
+            default: true
         }
+    },
+    mounted() {
+        if (this.watchValue) this.play()
     }
 }
 </script>
