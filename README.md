@@ -111,4 +111,4 @@ this.$refs.child.reset()
 ```
 
 ## License
-[MIT]
+[MIT](https://github.com/Reckfu1/vcount/blob/master/LICENSE)
